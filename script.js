@@ -3,6 +3,8 @@
 // create a displayController to populate stuff on DOM
 // make players populate stuff on DOM
 // build win/lose and turns logic
+//! add field clearing
+//! add field creating functions
 
 const X = 'x';
 const Y = 'y';
