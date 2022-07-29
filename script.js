@@ -5,11 +5,10 @@
 // build win/lose and turns logic
 
 const X = 'x';
-const Y = 'y'
+const Y = 'y';
 
 const Gameboard = (() => {
     const field = Array.from(Array(3), () => new Array(3));
-
 
     const getMark = function (x, y) {
         return this.field[x][y];
@@ -21,14 +20,14 @@ const Gameboard = (() => {
     };
 
     return {
-        field,
         getMark,
         setMark
     };
 })();
 
 
+const Player = (mark) => {
+    const getMark = () => mark;
 
-Gameboard.setMark(1, 2, 'x')
-
-console.log(Gameboard.getMark(1, 2));
+    return {getMark}
+};
