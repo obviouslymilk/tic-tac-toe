@@ -1,3 +1,14 @@
-.game-contaner {
+.game-container {
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    width: 500px;
+    height: 500px;
+    gap: 8px;
+    padding: 8px 8px 0px 8px;
+    background-color: burlywood;
+}
+
+.game-container div {
+    background-color: blanchedalmond;
 }
