@@ -14,16 +14,15 @@ const Gameboard = (() => {
 
     const createField = function () {
         field = new Array(9);
-        console.log('Field has been created.');
     }
 
-    const getMark = function (x) {
+    const getMark = function (x, y) {
         return this.field[x][y];
     };
 
 
-    const setMark = function (x, mark) {
-        this.field[x] = mark;
+    const setMark = function (x, y, mark) {
+        this.field[x][y] = mark;
     };
 
     return {
@@ -33,6 +32,21 @@ const Gameboard = (() => {
     };
 })();
 
+const DisplayController = (() => {
+
+    const createBoard = function() {
+        if (gameContainer.hasChildNodes()) return console.log('Game Container has been created already.');
+        for (let i = 0; i < 10; i++) {
+            const cell = document.createElement('div');
+            cell.id = i;
+            gameContainer.appendChild(cell);
+        }
+    }
+
+    const updateBoard = function (gameboard) {}
+
+    return {createBoard, updateBoard};
+})();
 
 const Player = (mark) => {
     const getMark = () => mark;
