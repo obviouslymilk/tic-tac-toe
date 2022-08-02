@@ -16,6 +16,14 @@ h1 {
     letter-spacing: 0.5rem;
 }
 
+button {
+    width: 12rem;
+    height: 4rem;
+    border: none;
+    border-radius: 12px;
+    font-size: large;
+}
+
 .game-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -40,11 +48,15 @@ h1 {
 }
 
 .O {
-    background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Saint_Andrew%27s_cross_black.svg/1200px-Saint_Andrew%27s_cross_black.svg.png);
+    background-image: url(assets/images/circle.png);
     background-size: 100%;
 }
 
 .X {
-    background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/LetterY.svg/640px-LetterY.svg.png);
+    background-image: url(assets/images/cross.png);
     background-size: 100%;
+}
+
+.players-info {
+    font-size: 2rem;
 }
