@@ -1,25 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap');
+
+* {
+    font-family: 'Nunito', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 3rem;
+    letter-spacing: 0.5rem;
+}
+
 .game-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     width: 500px;
     height: 500px;
-    gap: 8px;
-    padding: 8px;
-    background-color: burlywood;
+    gap: 1rem;
+    padding: 1rem;
+    margin: 2rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .game-container div {
-    background-color: blanchedalmond;
+    background-color: rgb(240, 240, 240);
+    border-radius: 8px;
     cursor: pointer;
 }
 
-.x {
+.O {
     background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Saint_Andrew%27s_cross_black.svg/1200px-Saint_Andrew%27s_cross_black.svg.png);
     background-size: 100%;
 }
 
-.y {
+.X {
     background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/LetterY.svg/640px-LetterY.svg.png);
     background-size: 100%;
 }

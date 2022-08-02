@@ -1,10 +1,10 @@
-
+// сделать функционал отображения победителя и нечьи
 
 const gameContainer = document.querySelector('.game-container');
 const playersInfo = document.querySelector('.players-info');
 
-const X = 'x';
-const Y = 'y';
+const X = 'O';
+const Y = 'X';
 
 let gameWon = false;
 
@@ -12,13 +12,13 @@ let gameWon = false;
  * Handle gameboard filed and game logic.
  */
 const Gameboard = (() => {
-
+    let field = new Array(9);
     /**
      * Create an empty game field or refresh the current one.
      * @return void
      */
     const createField = function () {
-        this.field = new Array(9);
+        field = new Array(9);
     };
 
     /**
@@ -27,7 +27,7 @@ const Gameboard = (() => {
      * @returns {String} mark of the cell
      */
     const getMark = function(x) {
-        return this.field[x];
+        return field[x];
     };
 
     /**
@@ -36,45 +36,55 @@ const Gameboard = (() => {
      * @param {String} _mark mark to set
      */
     const setMark = function (x, mark) {
-        this.field[x] = mark;
+        field[x] = mark;
     };
 
-    const Win = function() {
+    const win = function() {
         gameWon = true;
+        DisplayController.win();
+    }
+
+    const tie = function() {
+        if (field.includes(undefined)) return;
+        gameWon = true;
+        DisplayController.tie();
     }
 
 
     const isWin = function() {
         // check horizontals
         for (let i = 0; i <= 6; i+=3) {
-            
-            if (this.field[i] === this.field[i + 1] && this.field[i + 1] === this.field[i + 2] && (this.field[i] !== undefined)) {
-                Win()
+            if (field[i] === field[i + 1] && field[i + 1] === field[i + 2] && (field[i] !== undefined)) {
+                return win()
             }
         }
         // check vericals
         for (let i = 0; i <= 3; i++) {
             
-            if (this.field[i] === this.field[i + 3] && this.field[i + 3] === this.field[i + 6] && (this.field[i] !== undefined)) {
-                Win()
+            if (field[i] === field[i + 3] && field[i + 3] === field[i + 6] && (field[i] !== undefined)) {
+                return win()
             }
         }
 
         // check diagonals
-        if (this.field[0] === this.field[4] && this.field[4] === this.field[8] && this.field[0] !== undefined) {
-            Win()
+        if (field[0] === field[4] && field[4] === field[8] && field[0] !== undefined) {
+            return win()
         }
 
-        if (this.field[2] === this.field[4] && this.field[4] === this.field[6] && this.field[2] !== undefined) {
-            Win()
+        if (field[2] === field[4] && field[4] === field[6] && field[2] !== undefined) {
+            return win()
         }
+
+        tie()
     }
 
     return {
         createField,
         getMark,
         setMark,
-        isWin
+        isWin,
+        tie,
+        win
     };
 })();
 
@@ -97,6 +107,15 @@ const DisplayController = (() => {
         }
     }
 
+    const win = function() {
+        playersInfo.innerText = TurnsController.getCurrentPlayer() === TurnsController.getFirstPlayer() ? 'First player\'s won!' : 'Second player\'s won!'
+        console.log('baza');
+    }
+
+    const tie = function() {
+
+    }
+
     /**
      * 
      * @param {Number} cellId id of the cell
@@ -108,10 +127,9 @@ const DisplayController = (() => {
         
         Gameboard.setMark(cellId, mark)
         cell.classList.add(mark);
-        TurnsController.nextTurn();
     }
 
-    return {createBoard, setCell};
+    return {createBoard, setCell, win, tie};
 })();
 
 
@@ -124,11 +142,20 @@ const TurnsController = (() => {
     let currentPlayer;
 
     const updateTurnInfo = function() {
-        playersInfo.innerText = currentPlayer.getMark();
+        if (gameWon) return;
+        playersInfo.innerText = 'It\'s ' + currentPlayer.getMark() + ' turn!';
     }
 
     const getCurrentPlayer = function() {
         return currentPlayer;
+    }
+
+    const getFirstPlayer = function() {
+        return firstPlayer;
+    }
+
+    const getSecondPlayer = function() {
+        return secondPlayer;
     }
 
     const startGame = function(player1, player2) {
@@ -149,7 +176,7 @@ const TurnsController = (() => {
         Gameboard.isWin();
     }
 
-    return {startGame, getCurrentPlayer, nextTurn, checkForWin}
+    return {startGame, getCurrentPlayer, nextTurn, checkForWin, getFirstPlayer, getSecondPlayer}
 })();
 
 
@@ -164,6 +191,7 @@ function onCellClick(e) {
     if (gameWon === true) return;
     DisplayController.setCell(e.target.id, TurnsController.getCurrentPlayer().getMark());
     TurnsController.checkForWin();
+    TurnsController.nextTurn();
 }
 
 Gameboard.createField();
