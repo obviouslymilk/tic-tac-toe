@@ -1,7 +1,6 @@
-// сделать функционал отображения победителя и нечьи
-
 const gameContainer = document.querySelector('.game-container');
 const playersInfo = document.querySelector('.players-info');
+const restartButton = document.querySelector('.restart');
 
 const X = 'O';
 const Y = 'X';
@@ -109,11 +108,10 @@ const DisplayController = (() => {
 
     const win = function() {
         playersInfo.innerText = TurnsController.getCurrentPlayer() === TurnsController.getFirstPlayer() ? 'First player\'s won!' : 'Second player\'s won!'
-        console.log('baza');
     }
 
     const tie = function() {
-
+        playersInfo.innerText = 'Tie!'
     }
 
     /**
@@ -194,7 +192,14 @@ function onCellClick(e) {
     TurnsController.nextTurn();
 }
 
+
+function restart(e) {
+    location.reload();
+}
+
 Gameboard.createField();
 DisplayController.createBoard();
 
 TurnsController.startGame(Player(X), Player(Y));
+
+restartButton.addEventListener('click', restart)
