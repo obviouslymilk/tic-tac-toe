@@ -5,10 +5,21 @@
     width: 500px;
     height: 500px;
     gap: 8px;
-    padding: 8px 8px 0px 8px;
+    padding: 8px;
     background-color: burlywood;
 }
 
 .game-container div {
     background-color: blanchedalmond;
+    cursor: pointer;
+}
+
+.x {
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Saint_Andrew%27s_cross_black.svg/1200px-Saint_Andrew%27s_cross_black.svg.png);
+    background-size: 100%;
+}
+
+.y {
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/LetterY.svg/640px-LetterY.svg.png);
+    background-size: 100%;
 }
